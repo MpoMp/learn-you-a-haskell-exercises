@@ -1,0 +1,81 @@
+MpoMp's Haskell learning cheatsheet
+
+___________
+Operators
+___________
++ - * /
+&& || not
+< > <= >= == /=
+-- 
+{-
+ -
+ -}
+___________
+
+
+Functions
+___________
+succ n, min a b, max a b
+a `div` b, a `mod` b
+
+
+___________
+
+
+Flow control
+___________
+    function x = if x > 100  
+        then x  
+        else x*2   
+___________
+
+
+Lists
+___________
+++                  (concatenation)
+:                   (append element)
+list !! 1           (get list[1])
+minimum, maximum
+sum, product
+< > <= >= == /=     (element-wise comparison)
+head                (returns first element)
+tail                (returns all but head)
+last                (returns last element)
+init                (returns all but last)
+length
+null                (checks if empty)
+reverse
+take x list         (take x elements from the start)
+drop x list         (remove x elements from the start)
+x `div` list        (check if list contains x)
+
+cycle list                      (infinite list out of list)
+repeat x                        (infinite list out of element)
+take x(cycle list) 
+take x(repeat a)
+
+length' xs = sum [1 | _ <- xs]  ('_' is kind of a wildcard)
+
+Filtering examples
+[x*2 | x <- [1..10]]
+[x*2 | x <- [1..10], x*2 >= 12] 
+[ if x < 10 then "BOOM!" else "BANG!" | x <- xs, odd x]  
+[ x*y | x <- [2,5,10], y <- [8,10,11], x*y > 50] 
+[ [ x | x <- xs, even x ] | xs <- xxs
+___________
+
+
+Ranges
+___________
+[1..20]
+[1,2..20]
+[5,10..100]
+___________
+
+
+Tuples
+___________
+[(1,2),("One",2)]
+fst t, snd t                (first and second element)
+zip l1 l2                   (element-wise tuple generator, returns tuples in list)
+___________
