@@ -37,6 +37,7 @@ ___________
 list !! 1           (get list[1])
 minimum, maximum
 sum, product
+concat [l1,l2]      (flattens list of lists)
 < > <= >= == /=     (element-wise comparison)
 head                (returns first element)
 tail                (returns all but head)
