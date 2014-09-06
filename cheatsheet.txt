@@ -16,17 +16,21 @@ ___________
 Functions
 ___________
 succ n, min a b, max a b
-a `div` b, a `mod` b
 
+a `div/quot` b, a `mod/rem` b   (‘quot‘ is integer division truncated toward zero, while the result of ‘div‘ is truncated toward negative infinity. The div function is often the more natural one to use, whereas the quot function corresponds to the machine instruction on modern machines, so it's somewhat more efficient)
 
+a `compare` b                   (returns Ordering)
+show a                          (a must be Show, returns string)
+
+If a function is comprised only of special characters, it's considered an infix function by default. If we want to examine its type, pass it to another function or call it as a prefix function, we have to surround it in parentheses.
+
+fromIntegral                (fromIntegral :: (Num b, Integral a) => a -> b)
 ___________
 
 
 Flow control
 ___________
-    function x = if x > 100  
-        then x  
-        else x*2   
+    if x > 100 then x else x*2   
 ___________
 
 
@@ -80,3 +84,57 @@ ___________
 fst t, snd t                (first and second element)
 zip l1 l2                   (element-wise tuple generator, returns tuples in list)
 ___________
+
+
+Types
+___________
+:t x                (shows type of variable/function x)
+x :: T              (x has type of T, type annotation)
+
+Int                 (bounded, efficient)
+Integer             (not bounded)
+Float               (single precision)
+Double              (double precision)
+Bool
+Char
+String              (not actual type, is [Char])
+
+Ordering            (can be GT, LT or EQ)
+
+If no type is specified, then a type variable is given. 
+Functions using these, are called polymorphic.
+
+removeNonUppercase :: [Char] -> [Char]              (input type -> output type)
+removeNonUppercase :: String -> String
+removeNonUppercase st = [ c | c <- st, c `elem` ['A'..'Z']]
+
+addThree :: Int -> Int -> Int -> Int                (last arg is return type)
+addThree x y z = x + y + z    
+___________
+
+Typeclasses
+___________
+Everything before the => symbol is called a class constraint
+The elem function has a type of (Eq a) => a -> [a] -> Bool because it uses == over a list to check whether some value we're looking for is in it.
+
+Eq              (members implement == and /=)
+Ord             (members implement all the standard comparing functions such as >, <, >= and <=)
+Show            (members can be presented as strings)
+Read            (opposite of Show)
+Enum            (members are sequentially ordered types)
+Bounded         (members have an upper and a lower bound - minBound and maxBound functions, all tuples are part of Bounded if the components are also in it - e.g. maxBound :: (Bool, Int, Char) )
+
+Num
+Integral
+Floating
+
+___________
+
+
+
+
+
+
+
+
+
