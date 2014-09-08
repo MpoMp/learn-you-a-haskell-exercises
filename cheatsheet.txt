@@ -22,15 +22,51 @@ a `div/quot` b, a `mod/rem` b   (‘quot‘ is integer division truncated toward
 a `compare` b                   (returns Ordering)
 show a                          (a must be Show, returns string)
 
-If a function is comprised only of special characters, it's considered an infix function by default. If we want to examine its type, pass it to another function or call it as a prefix function, we have to surround it in parentheses.
+--If a function is comprised only of special characters, it's considered an infix function by --default. If we want to examine its type, pass it to another function or call it as a prefix --function, we have to surround it in parentheses.
 
 fromIntegral                (fromIntegral :: (Num b, Integral a) => a -> b)
+
+--Pattern is checked top to bottom.
+lucky :: (Integral a) => a -> String  
+lucky 7 = "LUCKY NUMBER SEVEN!"  
+lucky x = "Sorry, you're out of luck, pal!" 
+
+charName :: Char -> String 
+charName 'a' = "Albert"
+charName x = "???"
+
+addVectors :: (Num a) => (a, a) -> (a, a) -> (a, a)  
+addVectors (x1, y1) (x2, y2) = (x1 + x2, y1 + y2) 
+
+-- as pattern
+capital :: String -> String  
+capital "" = "Empty string, whoops!"  
+capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x] 
+
 ___________
 
 
 Flow control
 ___________
-    if x > 100 then x else x*2   
+if x > 100 then x else x*2   
+    
+--Guards
+bmiTell :: (RealFloat a) => a -> String  
+bmiTell bmi  
+   | bmi <= 18.5 = "You're underweight, you emo, you!"  
+   | bmi <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"  
+   | bmi <= 30.0 = "You're fat! Lose some weight, fatty!"  
+   | otherwise   = "You're a whale, congratulations!" 
+
+let bindings are expressions themselves. 
+where bindings are just syntactic constructs. 
+
+    case expression of pattern -> result  
+                       pattern -> result  
+                       pattern -> result  
+                       ...  
+
+                       
 ___________
 
 
