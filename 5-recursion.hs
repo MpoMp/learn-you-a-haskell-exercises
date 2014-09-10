@@ -1,7 +1,11 @@
 -- Raise x to the power y, using recursion
 -- For example, power 5 2 = 25
 power :: Int -> Int -> Int
-power x y = undefined
+power x y  
+    | y < 0 = error "power defined only for non-negative exponent"
+power _ 0 = 1
+power x y = x * power x (y-1)
+    
 
 -- create a list of length n of the fibbonaci sequence in reverse order
 -- examples: fib 0 = [0]
@@ -9,7 +13,14 @@ power x y = undefined
 --	     fib 10 = [55,34,21,13,8,5,3,2,1,1,0]	
 -- try to use a where clause
 fib :: (Num a, Eq a) => a -> [a]
-fib x = undefined
+fib x
+    -- | x < 0 = error "not defined for negative numbers" -- omitted due to function signature
+    | x == 0 = [0]
+    | x == 1 = [1, 0]
+    | otherwise = sum(take 2 prev) : prev
+    where prev = fib (x-1)
+
+
 
 -- This is not recursive, but have a go anyway.
 -- Create a function which takes two parameters, a number and a step
@@ -18,8 +29,11 @@ fib x = undefined
 --			    stepReverseSign -3 1 = 4
 --			    stepReverseSign 1 2 = -3
 stepReverseSign :: (Fractional a, Ord a) => a -> a -> a
-stepReverseSign a = undefined
+stepReverseSign a b
+    | a < 0 = (-a)+b
+    | otherwise = -(a+b)
 
+    
 {- Lets calculate pi.
  - The Leibniz formula for pi (http://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80)
  - Can be defined as pi = (4/1) - (4/3) + (4/5) - (4/7) ....
@@ -52,8 +66,11 @@ stepReverseSign a = undefined
  -}
 
 piCalc :: (Fractional a, Integral b, Ord a) => a -> (a, b)
-piCalc a = undefined
+piCalc a = piCalc' 1 0.0 a 0
 
 piCalc' :: (Ord a, Fractional a, Integral b) => a -> a -> a -> b -> (a, b)
-piCalc' w x y z = undefined
-
+piCalc' w x y z
+    | y >= abs (new - x) = (new, z)   -- tolerance threshold reached
+    | otherwise = piCalc' (stepReverseSign w 2) new y (z+1)    
+    where new = x + (4/w)
+    
