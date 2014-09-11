@@ -43,6 +43,50 @@ capital :: String -> String
 capital "" = "Empty string, whoops!"  
 capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x] 
 
+
+Lambdas are basically anonymous functions that are used because we need some functions only once.
+numLongChains :: Int  
+numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
+takeWhile function. 
+It takes a predicate and a list and then goes from the beginning of the list and returns its elements while the predicate holds true. Once an element is found for which the predicate doesn't hold, it stops.
+
+A fold takes a binary function, a starting value and a list to fold up.
+    sum' :: (Num a) => [a] -> a  
+    sum' xs = foldl (\acc x -> acc + x) 0 xs  
+    
+Folds can be used to implement any function where you traverse a list once, element by element, and then return something based on that. 
+Whenever you want to traverse a list to return something, chances are you want a fold. 
+That's why folds are, along with maps and filters, one of the most useful types of functions in functional programming.
+    
+Generally, if you have a function like foo a = bar b a, you can rewrite it as foo = bar b, because of currying.
+
+The right fold, foldr works in a similar way to the left fold, only the accumulator eats up the values from the right. 
+Also, the left fold's binary function has the accumulator as the first parameter and the current value as the second one (so \acc x -> ...), 
+the right fold's binary function has the current value as the first parameter and the accumulator as the second one (so \x acc -> ...). 
+Obviously right folds work on infinite lists, whereas left ones don't!
+
+The foldl1 and foldr1 functions assume the first (or last) element of the list to be the starting value and then start the fold with the element next to it.
+
+scanl and scanr are like foldl and foldr, only they report all the intermediate accumulator states in the form of a list. 
+
+$ function, also called function application
+sqrt (3 + 4 + 9) or if we use $ we can write it as sqrt $ 3 + 4 + 9 because $ has the lowest precedence of any operator
+But apart from getting rid of parentheses, $ means that function application can be treated just like another function. That way, we can, for instance, map function application over a list of functions.
+    ghci> map ($ 3) [(4+), (10*), (^2), sqrt]  
+    [7.0,30.0,9.0,1.7320508075688772] 
+
+    ______________
+
+Function composition (right associative)
+f . g = \x -> f (g x)
+
+sum . replicate 5 . max 6.7 $ 8.9 -- this is right associative, equals the line below
+--sum (replicate 5 (max 6.7 8.9))
+
+-- fn x = ceiling (negate (tan (cos (max 50 x))))  
+fn = ceiling . negate . tan . cos . max 50  
+    
 ___________
 
 
