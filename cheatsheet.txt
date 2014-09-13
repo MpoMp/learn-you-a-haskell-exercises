@@ -13,6 +13,73 @@ ___________
 ___________
 
 
+
+
+Modules
+___________
+:m + Data.List
+import Data.List Data.Map
+
+import Data.List (nub, sort)        (only)
+import Data.List hiding (nub)       (all but)
+
+import qualified Data.Map  
+This makes it so that if we want to reference Data.Map's filter function, we have to do Data.Map.filter, whereas just filter still refers to the normal filter we all know and love. 
+
+But typing out Data.Map in front of every function from that module is kind of tedious. That's why we can rename the qualified import to something shorter:
+import qualified Data.Map as Map
+
+Data.List
+--intersperse             (takes an element and a list and then puts that element in between each pair of elements in the list)
+--intercalate             (takes a list of lists and a list. It then inserts that list in between all those lists and then flattens the result.
+--transpose
+--foldl' and foldl1'        (are stricter versions of fold, memory-friendly)
+--concat
+--concatMap 
+--and, or                   (boolean lists)
+--any,all                   (predicate and list)
+--iterate                   (takes a function and a starting value. It applies the function to the starting value infinitely)
+--splitAt                   (returns tuple with sublists)
+--takeWhile, dropWhile
+--span,break                (like takeWhile, returns two lists in tuple)
+--sort,group
+--inits,tails               (recursively applied tail and init)
+--isInfixOf,isPrefixOf,isSuffixOf
+--elem,notElem
+--partition                 (splits lists based on predicate)
+--find                      (takes a list and a predicate and returns the first element that satisfies the predicate wrapped in a Maybe value)
+--elemIndex,elemIndices     (return Maybe and a list respectively)
+--findIndex,findIndices
+--zip2,zipWith2             (up to 7)
+--lines,unlines             (split/concat strings at/with \n)
+--words,unwords             (split/concat strings at/with spaces)
+--nub                       (remove duplicates)
+--delete                    (deletes first occurence of element)
+--\\                        (set difference)
+--union,intersect           (sets)
+--insert                    (takes an element and a list of elements that can be sorted and inserts it into the last position where it's still less than or equal to the next element
+--genericLength, genericTake, genericDrop, genericSplitAt, genericIndex, genericReplicate
+--sortBy, insertBy, maximumBy, minimumBy
+--nubBy, deleteBy, unionBy, intersectBy and groupBy     (use a custom equality function)
+--on                        (==) `on` (> 0) returns an equality function that looks like \x y -> (x > 0) == (y > 0)
+
+When you're dealing with By functions that take an equality function, you usually do (==) `on` something and when you're dealing with By functions that take an ordering function, you usually do compare `on` something
+
+Data.Char
+
+Data.Map
+fromList, toList
+empty, insert k v m, null,size, singleton k v, lookup k, member k m 
+keys, elems
+fromListWith,insertWith        (uses given function to deal with key duplicates)
+
+Data.Set
+
+
+___________
+
+
+
 Functions
 ___________
 succ n, min a b, max a b
